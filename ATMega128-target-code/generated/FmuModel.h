@@ -22,6 +22,6 @@ void syncOutputsToBuffers();
 void systemInit();
 void systemDeInit();
 
-extern struct PeriodicThreadStatus threads[];
+extern struct PeriodicThreadStatus* threads;
 
 #endif /* FMU_MODEL_H_ */

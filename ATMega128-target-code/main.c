@@ -7,8 +7,11 @@
 
 #include <stdarg.h>
 
+#define FATAL_ERROR(message)
+
 #include "Vdm.h"
-#include "VdmModel.h"
+#include "Fmu.h"
+#include "FmuModel.h"
 
 #include "adcutil.h"
 #include <avr/io.h>
@@ -16,6 +19,15 @@
 #include <util/delay.h>
 
 
+#define FMI_LEVEL_ID 0
+#define FMI_VALVE_STATE 3
+
+
+void fmuLoggerCache(void *componentEnvironment, fmi2String instanceName, fmi2Status status, fmi2String category,
+                     fmi2String message, ...)
+ {
+   
+ }
 
 int main()
 {
@@ -34,13 +46,14 @@ int main()
 	while (true)
 	{
 		//hardware sync inputs to buffer
-		fmiBuffer.realBuffer[_A_MISSING_ID_FOR_LEVEL]=ReadADC(0);
+		fmiBuffer.realBuffer[FMI_LEVEL_ID]=ReadADC(0);
 		
-		fmi2DoStep(NULL, now, step);
+		fmi2DoStep(NULL, now, step,false);
+
 		now = now + step;
 
 		//sync buffer with hardware
-		if( fmiBuffer.boolBuffer[_A_MISSING_ID_FOR_VALVE] )
+		if( fmiBuffer.booleanBuffer[FMI_VALVE_STATE] )
 		{
 			PORTB &= ~(1 << PINB3);
 		}else
