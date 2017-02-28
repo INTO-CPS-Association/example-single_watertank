@@ -1,15 +1,13 @@
 // The template for class header
-#ifndef CLASSES_World_H_
-#define CLASSES_World_H_
+#ifndef CLASSES_Port_H_
+#define CLASSES_Port_H_
 
 #define VDM_CG
 
 #include "Vdm.h"
 
 //include types used in the class
-#include "Controller.h"
-#include "World.h"
-#include "System.h"
+#include "Port.h"
 
 
 /* -------------------------------
@@ -26,7 +24,7 @@
  *
  --------------------------------- */ 
  
-extern TVP numFields_5;
+extern TVP numFields_1;
 
 
 /* -------------------------------
@@ -37,22 +35,22 @@ extern TVP numFields_5;
  
 
 //class id
-#define CLASS_ID_World_ID 4
+#define CLASS_ID_Port_ID 0
 
-#define WorldCLASS struct World*
+#define PortCLASS struct Port*
 
 // The vtable ids
-#define CLASS_World__Z3runEV 0
-#define CLASS_World__Z5blockEV 1
-#define CLASS_World__Z5WorldEV 2
+#define CLASS_Port__Z8setValueE5X1QCBR 0
+#define CLASS_Port__Z8getValueEV 1
+#define CLASS_Port__Z4PortEV 2
 
-struct World
+struct Port
 {
 	
-/* Definition of Class: 'World' */
-	VDM_CLASS_BASE_DEFINITIONS(World);
+/* Definition of Class: 'Port' */
+	VDM_CLASS_BASE_DEFINITIONS(Port);
 	 
-	VDM_CLASS_FIELD_DEFINITION(World,numFields);
+	VDM_CLASS_FIELD_DEFINITION(Port,numFields);
 
 };
 
@@ -64,8 +62,8 @@ struct World
  --------------------------------- */ 
  
 
-	/* World.vdmrt 6:7 */
-	TVP _Z5WorldEV(WorldCLASS this_);
+	/* Fmi.vdmrt 18:7 */
+	TVP _Z4PortEV(PortCLASS this_);
 
 
 /* -------------------------------
@@ -74,10 +72,10 @@ struct World
  *
  --------------------------------- */ 
  
-	void World_const_init();
-	void World_const_shutdown();
-	void World_static_init();
-	void World_static_shutdown();
+	void Port_const_init();
+	void Port_const_shutdown();
+	void Port_static_init();
+	void Port_static_shutdown();
 
 
 /* -------------------------------
@@ -87,9 +85,9 @@ struct World
  --------------------------------- */ 
  
 
-void World_free_fields(WorldCLASS);
-WorldCLASS World_Constructor(WorldCLASS);
+void Port_free_fields(PortCLASS);
+PortCLASS Port_Constructor(PortCLASS);
 
 
 
-#endif /* CLASSES_World_H_ */
+#endif /* CLASSES_Port_H_ */

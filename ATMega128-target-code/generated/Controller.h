@@ -9,9 +9,9 @@
 //include types used in the class
 #include "HardwareInterface.h"
 #include "ValveActuator.h"
-#include "IO.h"
 #include "LevelSensor.h"
 #include "Controller.h"
+#include "RealPort.h"
 
 
 /* -------------------------------
@@ -41,7 +41,7 @@ extern TVP g_Controller_close;
  
 
 //class id
-#define CLASS_ID_Controller_ID 1
+#define CLASS_ID_Controller_ID 5
 
 #define ControllerCLASS struct Controller*
 
@@ -70,7 +70,7 @@ struct Controller
  --------------------------------- */ 
  
 
-	/* Controller.vdmrt 17:8 */
+	/* Controller.vdmrt 20:8 */
 	TVP _Z10ControllerE11CLevelSensor13CValveActuator(ControllerCLASS this_, TVP l, TVP v);
 	/* Controller.vdmrt 6:7 */
 	TVP _Z10ControllerEV(ControllerCLASS this_);

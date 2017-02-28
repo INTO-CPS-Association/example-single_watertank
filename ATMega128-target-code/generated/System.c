@@ -12,7 +12,9 @@
 
 void System_free_fields(struct System *this)
 {
-			}
+				vdmFree(this->m_System_levelSensor);
+			vdmFree(this->m_System_valveActuator);
+		}
 
 static void System_free(struct System *this)
 {
@@ -32,39 +34,39 @@ static void System_free(struct System *this)
  --------------------------------- */
  
 
- static  TVP _Z17fieldInitializer7EV()	{
-/* System.vdmrt 11:46 */
-TVP ret_7 = NULL
+ static  TVP _Z18fieldInitializer11EV()	{
+/* System.vdmrt 13:46 */
+TVP ret_13 = NULL
 ;
 
-return ret_7;
+return ret_13;
 }
 
 
 
- static  TVP _Z17fieldInitializer6EV()	{
+ static  TVP _Z18fieldInitializer10EV()	{
 /* System.vdmrt 6:41 */
-TVP ret_8 = _Z17HardwareInterfaceEV(NULL)
+TVP ret_14 = _Z17HardwareInterfaceEV(NULL)
 ;
 
-return ret_8;
+return ret_14;
 }
 
 
 
- static  TVP _Z17fieldInitializer5EV()	{
+ static  TVP _Z17fieldInitializer9EV()	{
 
-TVP ret_9 = newInt(2)
+TVP ret_15 = newInt(4)
 ;
 
-return ret_9;
+return ret_15;
 }
 
 
 
  void System_const_init()	{
 
-numFields_3 = _Z17fieldInitializer5EV();
+numFields_3 = _Z17fieldInitializer9EV();
 
 return ;
 }
@@ -82,9 +84,9 @@ return ;
 
  void System_static_init()	{
 
-g_System_hwi = _Z17fieldInitializer6EV();
+g_System_hwi = _Z18fieldInitializer10EV();
 
-g_System_controller = _Z17fieldInitializer7EV();
+g_System_controller = _Z18fieldInitializer11EV();
 
 return ;
 }
@@ -143,7 +145,9 @@ SystemCLASS System_Constructor(SystemCLASS this_ptr)
 		this_ptr->_System_refs = 0;
 		this_ptr->_System_pVTable=VTableArrayForSystem;
 
-										}
+										this_ptr->m_System_levelSensor= NULL ;
+						this_ptr->m_System_valveActuator= NULL ;
+						}
 
 	return this_ptr;
 }
@@ -166,7 +170,7 @@ static TVP new()
  --------------------------------- */ 
  
 
-/* System.vdmrt 16:8 */
+/* System.vdmrt 18:8 */
  TVP _Z6SystemEV(SystemCLASS this)	{
 
 TVP __buf = NULL
@@ -181,14 +185,22 @@ __buf = new();
 this = TO_CLASS_PTR(__buf, System);
 }
 ;
-/* System.vdmrt 19:9 */
-TVP levelSensor = _Z11LevelSensorEV(NULL)
+/* System.vdmrt 21:20 */
+TVP field_tmp_7 = _Z11LevelSensorE8CRealPort(NULL, GET_FIELD_GC(HardwareInterface, HardwareInterface, vdmCloneGC(g_System_hwi, NULL), level))
 ;
-/* System.vdmrt 20:13 */
-TVP valveActuator = _Z13ValveActuatorEV(NULL)
+
+SET_FIELD_PTR_GC(System, System, this, levelSensor, field_tmp_7);
+
+vdmFree(field_tmp_7);
+/* System.vdmrt 22:23 */
+TVP field_tmp_8 = _Z13ValveActuatorE4CPort(NULL, GET_FIELD_GC(HardwareInterface, HardwareInterface, vdmCloneGC(g_System_hwi, NULL), valveState))
 ;
-/* System.vdmrt 22:9 */
-g_System_controller = _Z10ControllerE11CLevelSensor13CValveActuator(NULL, levelSensor, valveActuator);
+
+SET_FIELD_PTR_GC(System, System, this, valveActuator, field_tmp_8);
+
+vdmFree(field_tmp_8);
+/* System.vdmrt 24:5 */
+g_System_controller = _Z10ControllerE11CLevelSensor13CValveActuator(NULL, GET_FIELD_PTR_GC(System, System, this, levelSensor), GET_FIELD_PTR_GC(System, System, this, valveActuator));
 
 return __buf;
 }
@@ -205,5 +217,5 @@ return __buf;
 // initialize globals - this is done last since they are declared in the header but uses init functions which are printet in any order
 	TVP numFields_3 =  NULL ;
 		TVP g_System_hwi =  NULL ;
-		TVP g_System_controller =  NULL ;
+				TVP g_System_controller =  NULL ;
 	

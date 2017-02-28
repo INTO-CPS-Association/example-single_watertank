@@ -8,6 +8,8 @@
 
 //include types used in the class
 #include "HardwareInterface.h"
+#include "BoolPort.h"
+#include "RealPort.h"
 
 
 /* -------------------------------
@@ -37,7 +39,7 @@ extern TVP g_HardwareInterface_maxlevel;
  
 
 //class id
-#define CLASS_ID_HardwareInterface_ID 6
+#define CLASS_ID_HardwareInterface_ID 10
 
 #define HardwareInterfaceCLASS struct HardwareInterface*
 
@@ -64,7 +66,7 @@ struct HardwareInterface
  --------------------------------- */ 
  
 
-	/* HardwareInterface.vdmrt 3:7 */
+	/* HardwareInterface.vdmrt 20:7 */
 	TVP _Z17HardwareInterfaceEV(HardwareInterfaceCLASS this_);
 
 

@@ -1,6 +1,9 @@
 #define NO_MAPS
+#define NO_PATTERNS
+#define NO_PRODUCTS
 #define NO_RECORDS
 #define NO_MATH
 #define NO_CSV
+#define NO_IO
 #define NO_VDMUTIL
 #define NO_VDMUNIT

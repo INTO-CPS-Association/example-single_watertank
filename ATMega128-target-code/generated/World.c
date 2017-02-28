@@ -32,25 +32,27 @@ static void World_free(struct World *this)
  --------------------------------- */
  
 
- static  TVP _Z17fieldInitializer9EV()	{
+ static  TVP _Z18fieldInitializer13EV()	{
 
-TVP ret_12 = newInt(0)
+TVP ret_18 = newInt(0)
 ;
 
-return ret_12;
+return ret_18;
 }
 
 
 /* World.vdmrt 10:8 */
  static  void _Z3runEV(WorldCLASS this)	{
-/* World.vdmrt 14:3 */
-CALL_FUNC(Controller, Controller, vdmCloneGC(g_System_controller, NULL), CLASS_Controller__Z4loopEV);
+/* World.vdmrt 12:3 */
+;
+/* World.vdmrt 13:3 */
+CALL_FUNC_PTR(World, World, this, CLASS_World__Z5blockEV);
 }
 
 
-/* World.vdmrt 17:9 */
+/* World.vdmrt 16:9 */
  static  void _Z5blockEV(WorldCLASS this)	{
-/* World.vdmrt 19:3 */
+/* World.vdmrt 18:3 */
 {
 //Skip
 };
@@ -60,7 +62,7 @@ CALL_FUNC(Controller, Controller, vdmCloneGC(g_System_controller, NULL), CLASS_C
 
  void World_const_init()	{
 
-numFields_5 = _Z17fieldInitializer9EV();
+numFields_5 = _Z18fieldInitializer13EV();
 
 return ;
 }

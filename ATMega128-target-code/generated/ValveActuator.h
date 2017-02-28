@@ -7,10 +7,9 @@
 #include "Vdm.h"
 
 //include types used in the class
-#include "HardwareInterface.h"
-#include "IO.h"
 #include "ValveActuator.h"
-#include "System.h"
+#include "Port.h"
+#include "BoolPort.h"
 
 
 /* -------------------------------
@@ -38,13 +37,14 @@ extern TVP numFields_6;
  
 
 //class id
-#define CLASS_ID_ValveActuator_ID 5
+#define CLASS_ID_ValveActuator_ID 9
 
 #define ValveActuatorCLASS struct ValveActuator*
 
 // The vtable ids
-#define CLASS_ValveActuator__Z8setValveEB 0
-#define CLASS_ValveActuator__Z13ValveActuatorEV 1
+#define CLASS_ValveActuator__Z13ValveActuatorE4CPort 0
+#define CLASS_ValveActuator__Z8setValveEB 1
+#define CLASS_ValveActuator__Z13ValveActuatorEV 2
 
 struct ValveActuator
 {
@@ -52,6 +52,7 @@ struct ValveActuator
 /* Definition of Class: 'ValveActuator' */
 	VDM_CLASS_BASE_DEFINITIONS(ValveActuator);
 	 
+	VDM_CLASS_FIELD_DEFINITION(ValveActuator,port);
 	VDM_CLASS_FIELD_DEFINITION(ValveActuator,numFields);
 
 };
@@ -64,6 +65,8 @@ struct ValveActuator
  --------------------------------- */ 
  
 
+	/* ValveActuator.vdmrt 10:8 */
+	TVP _Z13ValveActuatorE4CPort(ValveActuatorCLASS this_, TVP p);
 	/* ValveActuator.vdmrt 1:7 */
 	TVP _Z13ValveActuatorEV(ValveActuatorCLASS this_);
 

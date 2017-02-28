@@ -34,63 +34,63 @@ static void HardwareInterface_free(struct HardwareInterface *this)
  --------------------------------- */
  
 
+ static  TVP _Z18fieldInitializer19EV()	{
+/* HardwareInterface.vdmrt 36:37 */
+TVP ret_20 = _Z8BoolPortEB(NULL, newBool(false))
+;
+
+return ret_20;
+}
+
+
+
+ static  TVP _Z18fieldInitializer18EV()	{
+/* HardwareInterface.vdmrt 31:32 */
+TVP ret_21 = _Z8RealPortER(NULL, newReal(0.0))
+;
+
+return ret_21;
+}
+
+
+
+ static  TVP _Z18fieldInitializer17EV()	{
+/* HardwareInterface.vdmrt 26:34 */
+TVP ret_22 = _Z8RealPortER(NULL, newReal(2.0))
+;
+
+return ret_22;
+}
+
+
+
+ static  TVP _Z18fieldInitializer16EV()	{
+/* HardwareInterface.vdmrt 24:34 */
+TVP ret_23 = _Z8RealPortER(NULL, newReal(1.0))
+;
+
+return ret_23;
+}
+
+
+
  static  TVP _Z18fieldInitializer15EV()	{
-/* HardwareInterface.vdmrt 19:33 */
-TVP ret_14 = newBool(false)
+
+TVP ret_24 = newInt(4)
 ;
 
-return ret_14;
-}
-
-
-
- static  TVP _Z18fieldInitializer14EV()	{
-/* HardwareInterface.vdmrt 14:28 */
-TVP ret_15 = newReal(0.0)
-;
-
-return ret_15;
-}
-
-
-
- static  TVP _Z18fieldInitializer13EV()	{
-/* HardwareInterface.vdmrt 9:30 */
-TVP ret_16 = newReal(2.0)
-;
-
-return ret_16;
-}
-
-
-
- static  TVP _Z18fieldInitializer12EV()	{
-/* HardwareInterface.vdmrt 7:30 */
-TVP ret_17 = newReal(1.0)
-;
-
-return ret_17;
-}
-
-
-
- static  TVP _Z18fieldInitializer11EV()	{
-
-TVP ret_18 = newInt(4)
-;
-
-return ret_18;
+return ret_24;
 }
 
 
 
  void HardwareInterface_const_init()	{
 
-numFields_7 = _Z18fieldInitializer11EV();
+numFields_7 = _Z18fieldInitializer15EV();
 
-g_HardwareInterface_minlevel = _Z18fieldInitializer12EV();
+g_HardwareInterface_minlevel = _Z18fieldInitializer16EV();
 
-g_HardwareInterface_maxlevel = _Z18fieldInitializer13EV();
+g_HardwareInterface_maxlevel = _Z18fieldInitializer17EV();
 
 return ;
 }
@@ -165,8 +165,8 @@ HardwareInterfaceCLASS HardwareInterface_Constructor(HardwareInterfaceCLASS this
 		this_ptr->_HardwareInterface_refs = 0;
 		this_ptr->_HardwareInterface_pVTable=VTableArrayForHardwareInterface;
 
-													this_ptr->m_HardwareInterface_level= _Z18fieldInitializer14EV();
-						this_ptr->m_HardwareInterface_valveState= _Z18fieldInitializer15EV();
+													this_ptr->m_HardwareInterface_level= _Z18fieldInitializer18EV();
+						this_ptr->m_HardwareInterface_valveState= _Z18fieldInitializer19EV();
 			}
 
 	return this_ptr;
@@ -190,7 +190,7 @@ static TVP new()
  --------------------------------- */ 
  
 
-/* HardwareInterface.vdmrt 3:7 */
+/* HardwareInterface.vdmrt 20:7 */
  TVP _Z17HardwareInterfaceEV(HardwareInterfaceCLASS this)	{
 
 TVP __buf = NULL

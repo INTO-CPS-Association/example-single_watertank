@@ -32,15 +32,8 @@
 				<File name="System.vdmrt" />
 				<File name="ValveActuator.vdmrt" />
 				<File name="World.vdmrt" />
-				<File name="lib/IO.vdmrt" />
-				<File name="lib/Reflect.vdmrt" />
-
 			</SourceFiles>
-		
 		</CoSimulation>
-
-
-
 	<LogCategories>
 		<Category name="logAll" />
 		<Category name="logError" />

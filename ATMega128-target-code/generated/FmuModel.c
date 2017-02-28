@@ -5,58 +5,94 @@
  *      Author: kel
  */
 #include "Fmu.h"
+#include "FmuModel.h"
 
 #define PERIODIC_GENERATED
+
 
 
 #include <stdarg.h>
 #include "Fmu.h"
 #include "Vdm.h"
-#include "adcutil.h"
 
+#include "Port.h"
+#include "IntPort.h"
+#include "BoolPort.h"
+#include "RealPort.h"
+#include "StringPort.h"
 #include "Controller.h"
-#include "HardwareInterface.h"
-#include "LevelSensor.h"
 #include "System.h"
-#include "ValveActuator.h"
+#include "LevelSensor.h"
 #include "World.h"
-#include "IO.h"
-
-TVP sys = NULL;
+#include "ValveActuator.h"
+#include "HardwareInterface.h"
 
 
 void syncInputsToModel(){
-	
+	{
+		TVP newValue = newReal(fmiBuffer.realBuffer[0]);
+		TVP p = GET_FIELD(HardwareInterface,HardwareInterface,g_System_hwi,level);
+		SET_FIELD(RealPort,RealPort,p,value,newValue);
+		vdmFree(newValue);vdmFree(p);
+	}
+	{
+		TVP newValue = newReal(fmiBuffer.realBuffer[1]);
+		SET_FIELD(RealPort,RealPort,g_HardwareInterface_minlevel,value,newValue);
+		vdmFree(newValue);
+	}
+	{
+		TVP newValue = newReal(fmiBuffer.realBuffer[2]);
+		SET_FIELD(RealPort,RealPort,g_HardwareInterface_maxlevel,value,newValue);
+		vdmFree(newValue);
+	}
 }
 void syncOutputsToBuffers(){
-	
+	{
+		TVP p = GET_FIELD(HardwareInterface,HardwareInterface,g_System_hwi,valveState);
+		TVP v = GET_FIELD(BoolPort,BoolPort,p,value);
+		fmiBuffer.booleanBuffer[3]=v->value.boolVal;
+		vdmFree(v);vdmFree(p);
+	}
 }
-#define PERIODIC_GENERATED_COUNT 0
-
+void periodic_taskg_System_controller__Z4loopEV()
+{
+	CALL_FUNC(Controller, Controller, g_System_controller, CLASS_Controller__Z4loopEV);
+	g_fmiCallbackFunctions->logger((void*) 1, g_fmiInstanceName, fmi2OK, "logAll", "called &periodic_taskg_System_controller__Z4loopEV\n");
+}
 
 
 struct PeriodicThreadStatus threads[] ={
-
+{ 1.0E7, &periodic_taskg_System_controller__Z4loopEV, 0 }
 };
 
 
+TVP sys = NULL;
+
 void systemInit()
 {
+	Port_const_init();
+	IntPort_const_init();
+	BoolPort_const_init();
+	RealPort_const_init();
+	StringPort_const_init();
 	Controller_const_init();
-	HardwareInterface_const_init();
-	LevelSensor_const_init();
 	System_const_init();
-	ValveActuator_const_init();
+	LevelSensor_const_init();
 	World_const_init();
-	IO_const_init();
+	ValveActuator_const_init();
+	HardwareInterface_const_init();
 
+	Port_static_init();
+	IntPort_static_init();
+	BoolPort_static_init();
+	RealPort_static_init();
+	StringPort_static_init();
 	Controller_static_init();
-	HardwareInterface_static_init();
-	LevelSensor_static_init();
 	System_static_init();
-	ValveActuator_static_init();
+	LevelSensor_static_init();
 	World_static_init();
-	IO_static_init();
+	ValveActuator_static_init();
+	HardwareInterface_static_init();
 
 	sys = _Z6SystemEV(NULL);
 
@@ -65,21 +101,29 @@ void systemInit()
 
 void systemDeInit()
 {
+	Port_static_shutdown();
+	IntPort_static_shutdown();
+	BoolPort_static_shutdown();
+	RealPort_static_shutdown();
+	StringPort_static_shutdown();
 	Controller_static_shutdown();
-	HardwareInterface_static_shutdown();
-	LevelSensor_static_shutdown();
 	System_static_shutdown();
-	ValveActuator_static_shutdown();
+	LevelSensor_static_shutdown();
 	World_static_shutdown();
-	IO_static_shutdown();
+	ValveActuator_static_shutdown();
+	HardwareInterface_static_shutdown();
 
+	Port_const_shutdown();
+	IntPort_const_shutdown();
+	BoolPort_const_shutdown();
+	RealPort_const_shutdown();
+	StringPort_const_shutdown();
 	Controller_const_shutdown();
-	HardwareInterface_const_shutdown();
-	LevelSensor_const_shutdown();
 	System_const_shutdown();
-	ValveActuator_const_shutdown();
+	LevelSensor_const_shutdown();
 	World_const_shutdown();
-	IO_const_shutdown();
+	ValveActuator_const_shutdown();
+	HardwareInterface_const_shutdown();
 
 	vdmFree(sys);
 
@@ -160,74 +204,3 @@ void systemMain()
 	CALL_FUNC(World, World, world, CLASS_World__Z3runEV);
 	vdmFree(world);
 }
-
-
-#ifdef PERIODIC_GENERATED
-
-
-void fmuLoggerCache(void *componentEnvironment, fmi2String instanceName, fmi2Status status, fmi2String category,
-                    fmi2String message, ...)
-{
-    va_list(args);
-    
-    va_start(args, message);
-    vprintf(message, args);
-    va_end(args);
-}
-
-int main()
-{
-	vdm_gc_init();
-
-	DDRB = 0xff;
-	PORTB = 0xff;
-
-    InitADC();
-	
-    fmi2CallbackFunctions callback={&fmuLoggerCache,NULL,NULL,NULL,NULL};
-    
-    fmi2Instantiate("this system",fmi2CoSimulation,"","",&callback,fmi2True,fmi2True);
-    systemInit();
-    syncInputsToModel();
-    
-    double stepSize = 0;
-    double totalTime = 10E9;
-    
-    
-    for(int i = 0;  i < PERIODIC_GENERATED_COUNT; i++)
-    {
-        if(stepSize < threads[i].period)
-        {
-            stepSize = threads[i].period;
-        }
-    }
-    
-    //convert to seconds
-    stepSize = stepSize / 1E9;
-    
-    printf("Stepsize is: %f seconds.\n",stepSize);
-    
-    for (double time =0; time < totalTime; time=time+stepSize) {
-    printf("Stepping... \n");
-        
-            if(fmi2OK !=fmi2DoStep(NULL,time,stepSize,fmi2False))
-            {
-                printf("Step did not return ok\n");
-                return 1;
-            }
-
-	PORTB |= (1 << PINB0);
-        _delay_ms(200);
-        PORTB &= ~(1 << PINB0);
-        _delay_ms(200);
-	    
-	    printf("Calling GC.\n");
-	    vdm_gc();
-    }
-    printf("Done\n");
-    vdm_gc_shutdown();
-  
-}
-
-
-#endif

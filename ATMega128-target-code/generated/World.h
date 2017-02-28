@@ -1,16 +1,14 @@
 // The template for class header
-#ifndef CLASSES_System_H_
-#define CLASSES_System_H_
+#ifndef CLASSES_World_H_
+#define CLASSES_World_H_
 
 #define VDM_CG
 
 #include "Vdm.h"
 
 //include types used in the class
-#include "HardwareInterface.h"
-#include "ValveActuator.h"
-#include "LevelSensor.h"
 #include "Controller.h"
+#include "World.h"
 #include "System.h"
 
 
@@ -28,9 +26,7 @@
  *
  --------------------------------- */ 
  
-extern TVP numFields_3;
-extern TVP g_System_hwi;
-extern TVP g_System_controller;
+extern TVP numFields_5;
 
 
 /* -------------------------------
@@ -41,20 +37,22 @@ extern TVP g_System_controller;
  
 
 //class id
-#define CLASS_ID_System_ID 2
+#define CLASS_ID_World_ID 8
 
-#define SystemCLASS struct System*
+#define WorldCLASS struct World*
 
 // The vtable ids
-#define CLASS_System__Z6SystemEV 0
+#define CLASS_World__Z3runEV 0
+#define CLASS_World__Z5blockEV 1
+#define CLASS_World__Z5WorldEV 2
 
-struct System
+struct World
 {
 	
-/* Definition of Class: 'System' */
-	VDM_CLASS_BASE_DEFINITIONS(System);
+/* Definition of Class: 'World' */
+	VDM_CLASS_BASE_DEFINITIONS(World);
 	 
-	VDM_CLASS_FIELD_DEFINITION(System,numFields);
+	VDM_CLASS_FIELD_DEFINITION(World,numFields);
 
 };
 
@@ -66,8 +64,8 @@ struct System
  --------------------------------- */ 
  
 
-	/* System.vdmrt 16:8 */
-	TVP _Z6SystemEV(SystemCLASS this_);
+	/* World.vdmrt 6:7 */
+	TVP _Z5WorldEV(WorldCLASS this_);
 
 
 /* -------------------------------
@@ -76,10 +74,10 @@ struct System
  *
  --------------------------------- */ 
  
-	void System_const_init();
-	void System_const_shutdown();
-	void System_static_init();
-	void System_static_shutdown();
+	void World_const_init();
+	void World_const_shutdown();
+	void World_static_init();
+	void World_static_shutdown();
 
 
 /* -------------------------------
@@ -89,9 +87,9 @@ struct System
  --------------------------------- */ 
  
 
-void System_free_fields(SystemCLASS);
-SystemCLASS System_Constructor(SystemCLASS);
+void World_free_fields(WorldCLASS);
+WorldCLASS World_Constructor(WorldCLASS);
 
 
 
-#endif /* CLASSES_System_H_ */
+#endif /* CLASSES_World_H_ */

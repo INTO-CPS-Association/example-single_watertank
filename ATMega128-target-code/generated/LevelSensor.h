@@ -7,9 +7,8 @@
 #include "Vdm.h"
 
 //include types used in the class
-#include "HardwareInterface.h"
 #include "LevelSensor.h"
-#include "System.h"
+#include "RealPort.h"
 
 
 /* -------------------------------
@@ -37,13 +36,14 @@ extern TVP numFields_4;
  
 
 //class id
-#define CLASS_ID_LevelSensor_ID 3
+#define CLASS_ID_LevelSensor_ID 7
 
 #define LevelSensorCLASS struct LevelSensor*
 
 // The vtable ids
-#define CLASS_LevelSensor__Z8getLevelEV 0
-#define CLASS_LevelSensor__Z11LevelSensorEV 1
+#define CLASS_LevelSensor__Z11LevelSensorE8CRealPort 0
+#define CLASS_LevelSensor__Z8getLevelEV 1
+#define CLASS_LevelSensor__Z11LevelSensorEV 2
 
 struct LevelSensor
 {
@@ -51,6 +51,7 @@ struct LevelSensor
 /* Definition of Class: 'LevelSensor' */
 	VDM_CLASS_BASE_DEFINITIONS(LevelSensor);
 	 
+	VDM_CLASS_FIELD_DEFINITION(LevelSensor,port);
 	VDM_CLASS_FIELD_DEFINITION(LevelSensor,numFields);
 
 };
@@ -63,6 +64,8 @@ struct LevelSensor
  --------------------------------- */ 
  
 
+	/* LevelSensor.vdmrt 10:8 */
+	TVP _Z11LevelSensorE8CRealPort(LevelSensorCLASS this_, TVP p);
 	/* LevelSensor.vdmrt 1:7 */
 	TVP _Z11LevelSensorEV(LevelSensorCLASS this_);
 

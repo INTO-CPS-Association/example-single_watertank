@@ -34,70 +34,47 @@ static void Controller_free(struct Controller *this)
  --------------------------------- */
  
 
- static  TVP _Z17fieldInitializer4EV()	{
-/* Controller.vdmrt 25:15 */
-TVP ret_4 = newBool(false)
+ static  TVP _Z17fieldInitializer8EV()	{
+/* Controller.vdmrt 16:15 */
+TVP ret_10 = newBool(false)
 ;
 
-return ret_4;
+return ret_10;
 }
 
 
 
- static  TVP _Z17fieldInitializer3EV()	{
-/* Controller.vdmrt 24:15 */
-TVP ret_5 = newBool(true)
+ static  TVP _Z17fieldInitializer7EV()	{
+/* Controller.vdmrt 15:15 */
+TVP ret_11 = newBool(true)
 ;
 
-return ret_5;
+return ret_11;
 }
 
 
 
- static  TVP _Z17fieldInitializer2EV()	{
+ static  TVP _Z17fieldInitializer6EV()	{
 
-TVP ret_6 = newInt(4)
+TVP ret_12 = newInt(4)
 ;
 
-return ret_6;
+return ret_12;
 }
 
 
-/* Controller.vdmrt 29:8 */
+/* Controller.vdmrt 27:9 */
  static  void _Z4loopEV(ControllerCLASS this)	{
-
-TVP TmpVar1 = _Z2IOEV(NULL)
-;
-
-TVP TmpVar2 = _Z2IOEV(NULL)
-;
-
-TVP TmpVar3 = _Z2IOEV(NULL)
-;
-/* Controller.vdmrt 36:9 */
+/* Controller.vdmrt 32:8 */
 TVP level = CALL_FUNC(LevelSensor, LevelSensor, GET_FIELD_PTR_GC(Controller, Controller, this, levelSensor), CLASS_LevelSensor__Z8getLevelEV)
 ;
-/* Controller.vdmrt 39:14 */
-TVP embeding_1 = newSeqVar(10, newCharGC('L', NULL), newCharGC('e', NULL), newCharGC('v', NULL), newCharGC('e', NULL), newCharGC('l', NULL), newCharGC(' ', NULL), newCharGC('i', NULL), newCharGC('s', NULL), newCharGC(':', NULL), newCharGC(' ', NULL))
-
-;
-/* Controller.vdmrt 39:5 */
-CALL_FUNC(IO, IO, TmpVar1, CLASS_IO__Z5printEU, embeding_1);
-/* Controller.vdmrt 39:28 */
-CALL_FUNC(IO, IO, TmpVar2, CLASS_IO__Z5printEU, level);
-/* Controller.vdmrt 39:54 */
-TVP embeding_2 = newSeqVar(1, newCharGC('\n', NULL))
-
-;
-/* Controller.vdmrt 39:45 */
-CALL_FUNC(IO, IO, TmpVar3, CLASS_IO__Z5printEU, embeding_2);
-/* Controller.vdmrt 41:5 */
-if ( toBool(vdmGreaterOrEqualGC(level, g_HardwareInterface_maxlevel, NULL)) )
-	/* Controller.vdmrt 42:10 */
+/* Controller.vdmrt 36:5 */
+if ( toBool(vdmGreaterOrEqualGC(level, CALL_FUNC(RealPort, RealPort, g_HardwareInterface_maxlevel, CLASS_RealPort__Z8getValueEV), NULL)) )
+	/* Controller.vdmrt 37:10 */
 	CALL_FUNC(ValveActuator, ValveActuator, GET_FIELD_PTR_GC(Controller, Controller, this, valveActuator), CLASS_ValveActuator__Z8setValveEB, g_Controller_open);;
-/* Controller.vdmrt 44:5 */
-if ( toBool(vdmLessOrEqualGC(level, g_HardwareInterface_minlevel, NULL)) )
-	/* Controller.vdmrt 45:10 */
+/* Controller.vdmrt 39:5 */
+if ( toBool(vdmLessOrEqualGC(level, CALL_FUNC(RealPort, RealPort, g_HardwareInterface_minlevel, CLASS_RealPort__Z8getValueEV), NULL)) )
+	/* Controller.vdmrt 40:10 */
 	CALL_FUNC(ValveActuator, ValveActuator, GET_FIELD_PTR_GC(Controller, Controller, this, valveActuator), CLASS_ValveActuator__Z8setValveEB, g_Controller_close);;
 }
 
@@ -105,11 +82,11 @@ if ( toBool(vdmLessOrEqualGC(level, g_HardwareInterface_minlevel, NULL)) )
 
  void Controller_const_init()	{
 
-numFields_2 = _Z17fieldInitializer2EV();
+numFields_2 = _Z17fieldInitializer6EV();
 
-g_Controller_open = _Z17fieldInitializer3EV();
+g_Controller_open = _Z17fieldInitializer7EV();
 
-g_Controller_close = _Z17fieldInitializer4EV();
+g_Controller_close = _Z17fieldInitializer8EV();
 
 return ;
 }
@@ -211,7 +188,7 @@ static TVP new()
  --------------------------------- */ 
  
 
-/* Controller.vdmrt 17:8 */
+/* Controller.vdmrt 20:8 */
  TVP _Z10ControllerE11CLevelSensor13CValveActuator(ControllerCLASS this, TVP l, TVP v)	{
 
 TVP __buf = NULL
@@ -226,20 +203,20 @@ __buf = new();
 this = TO_CLASS_PTR(__buf, Controller);
 }
 ;
-/* Controller.vdmrt 19:20 */
-TVP field_tmp_1 = vdmCloneGC(l, &field_tmp_1)
+/* Controller.vdmrt 23:20 */
+TVP field_tmp_5 = vdmCloneGC(l, &field_tmp_5)
 ;
 
-SET_FIELD_PTR_GC(Controller, Controller, this, levelSensor, field_tmp_1);
+SET_FIELD_PTR_GC(Controller, Controller, this, levelSensor, field_tmp_5);
 
-vdmFree(field_tmp_1);
-/* Controller.vdmrt 20:20 */
-TVP field_tmp_2 = vdmCloneGC(v, &field_tmp_2)
+vdmFree(field_tmp_5);
+/* Controller.vdmrt 24:20 */
+TVP field_tmp_6 = vdmCloneGC(v, &field_tmp_6)
 ;
 
-SET_FIELD_PTR_GC(Controller, Controller, this, valveActuator, field_tmp_2);
+SET_FIELD_PTR_GC(Controller, Controller, this, valveActuator, field_tmp_6);
 
-vdmFree(field_tmp_2);
+vdmFree(field_tmp_6);
 
 return __buf;
 }

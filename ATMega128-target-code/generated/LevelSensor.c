@@ -12,6 +12,7 @@
 
 void LevelSensor_free_fields(struct LevelSensor *this)
 {
+			vdmFree(this->m_LevelSensor_port);
 	}
 
 static void LevelSensor_free(struct LevelSensor *this)
@@ -32,33 +33,29 @@ static void LevelSensor_free(struct LevelSensor *this)
  --------------------------------- */
  
 
- static  TVP _Z17fieldInitializer8EV()	{
+ static  TVP _Z18fieldInitializer12EV()	{
 
-TVP ret_10 = newInt(0)
+TVP ret_16 = newInt(1)
 ;
 
-return ret_10;
+return ret_16;
 }
 
 
-/* LevelSensor.vdmrt 9:8 */
+/* LevelSensor.vdmrt 13:8 */
  static  TVP _Z8getLevelEV(LevelSensorCLASS this)	{
-/* LevelSensor.vdmrt 12:8 */
-//TVP ret_11 = GET_FIELD_GC(HardwareInterface, HardwareInterface, vdmCloneGC(g_System_hwi, NULL), level);
-/* LevelSensor.vdmrt 12:1 */
-
-uint16_t av = ReadADC(0);
-return newReal((int16_t)av);
-
-
-//return ret_11;
+/* LevelSensor.vdmrt 14:21 */
+TVP ret_17 = CALL_FUNC(RealPort, RealPort, GET_FIELD_PTR_GC(LevelSensor, LevelSensor, this, port), CLASS_RealPort__Z8getValueEV)
+;
+/* LevelSensor.vdmrt 14:14 */
+return ret_17;
 }
 
 
 
  void LevelSensor_const_init()	{
 
-numFields_4 = _Z17fieldInitializer8EV();
+numFields_4 = _Z18fieldInitializer12EV();
 
 return ;
 }
@@ -98,6 +95,7 @@ return ;
 // VTable for this class
  static  struct VTable VTableArrayForLevelSensor  [] ={
 
+{0,0,((VirtualFunctionPointer) _Z11LevelSensorE8CRealPort),},
 {0,0,((VirtualFunctionPointer) _Z8getLevelEV),},
 {0,0,((VirtualFunctionPointer) _Z11LevelSensorEV),},
 				
@@ -130,7 +128,8 @@ LevelSensorCLASS LevelSensor_Constructor(LevelSensorCLASS this_ptr)
 		this_ptr->_LevelSensor_refs = 0;
 		this_ptr->_LevelSensor_pVTable=VTableArrayForLevelSensor;
 
-				}
+							this_ptr->m_LevelSensor_port= NULL ;
+			}
 
 	return this_ptr;
 }
@@ -152,6 +151,33 @@ static TVP new()
  *
  --------------------------------- */ 
  
+
+/* LevelSensor.vdmrt 10:8 */
+ TVP _Z11LevelSensorE8CRealPort(LevelSensorCLASS this, TVP p)	{
+
+TVP __buf = NULL
+;
+
+if ( this == NULL )
+	
+	{
+
+__buf = new();
+
+this = TO_CLASS_PTR(__buf, LevelSensor);
+}
+;
+/* LevelSensor.vdmrt 11:27 */
+TVP field_tmp_9 = vdmCloneGC(p, &field_tmp_9)
+;
+
+SET_FIELD_PTR_GC(LevelSensor, LevelSensor, this, port, field_tmp_9);
+
+vdmFree(field_tmp_9);
+
+return __buf;
+}
+
 
 /* LevelSensor.vdmrt 1:7 */
  TVP _Z11LevelSensorEV(LevelSensorCLASS this)	{
@@ -183,4 +209,4 @@ return __buf;
  
 // initialize globals - this is done last since they are declared in the header but uses init functions which are printet in any order
 	TVP numFields_4 =  NULL ;
-	
+		

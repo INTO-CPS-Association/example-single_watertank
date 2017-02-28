@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 2.8.5)
-project (wtc C CXX)
+project (watertankController C CXX)
 
 
 add_definitions(-DCUSTOM_IO -DPERIODIC_GENERATED -DFMI_COSIMULATION)
