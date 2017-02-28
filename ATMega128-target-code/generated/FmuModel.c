@@ -70,6 +70,8 @@ TVP sys = NULL;
 
 void systemInit()
 {
+	vdm_gc_init();
+
 	Port_const_init();
 	IntPort_const_init();
 	BoolPort_const_init();
@@ -126,7 +128,7 @@ void systemDeInit()
 	HardwareInterface_const_shutdown();
 
 	vdmFree(sys);
-
+	vdm_gc_shutdown();
 }
 
 

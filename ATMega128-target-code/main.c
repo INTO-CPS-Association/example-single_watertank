@@ -53,6 +53,8 @@ int main()
 		_delay_ms(200);
 		PORTB &= ~(1 << PINB0);
 		_delay_ms(200);
+
+		vdm_gc();
 	}
 
 	return 0;
