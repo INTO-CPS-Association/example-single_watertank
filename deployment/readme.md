@@ -41,7 +41,7 @@ Make sure you have the required dependencies for linux these are:
 Also make sure you actually checked out the submodules:
 
 ```
-git submodule update
+git submodule update --init
 ```
 
 Run this to generate the make file:
