@@ -1,4 +1,4 @@
-ls
+
 # Deployment
 
 ## STEP 1: Run the VDM generator
@@ -30,6 +30,19 @@ in this case we added `main.c`
 
 
 ## STEP 3: Compile the code for the target
+
+Make sure you have the required dependencies for linux these are: 
+
+* `gcc-avr` - AVR GNU GCC compiler
+* `binutils-avr` - AVR binary tools
+* `avr-libc` - AVR C library
+* `avrdude` - Firmware uploader
+
+Also make sure you actually checked out the submodules:
+
+```
+git submodule update
+```
 
 Run this to generate the make file:
 
