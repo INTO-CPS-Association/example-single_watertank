@@ -61,7 +61,7 @@ void periodic_taskg_System_controller__Z4loopEV()
 }
 
 
-struct PeriodicThreadStatus* threads =&(struct PeriodicThreadStatus){
+struct PeriodicThreadStatus threads[] ={
 { 1.0E7, &periodic_taskg_System_controller__Z4loopEV, 0 }
 };
 

@@ -37,7 +37,7 @@ extern struct FmiBuffer fmiBuffer;
 extern const fmi2CallbackFunctions *g_fmiCallbackFunctions;
 extern const char* g_fmiInstanceName;
 
-extern struct PeriodicThreadStatus* threads;
+extern struct PeriodicThreadStatus threads[];
 
 void syncInputsToModel();
 void syncOutputsToBuffers();
