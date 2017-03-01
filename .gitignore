@@ -38,3 +38,13 @@ SysML/Single_tank/.runtime/projectInfo.html
 SysML/Single_tank/.runtime/lock.dat
 SysML/Single_tank/.runtime/lock.info
 SysML/Single_tank/.runtime/fragments/Single_tank/.index/index.idr.0
+
+
+**/CMakeFiles
+**/*.cmake
+CMakeCache.txt
+
+# avr
+*.hex
+*.elf
+*.map
