@@ -1,0 +1,8 @@
+
+8MHz
+
+Extended 0xFE
+High 0x9D
+Low 0xC2
+
+Avr Studio 4.18
