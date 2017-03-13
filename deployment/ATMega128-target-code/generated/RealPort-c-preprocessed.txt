@@ -1014,7 +1014,7 @@ return ret_6;
 
 struct TypedValue* field_tmp_3 = vdmCloneGC(v, &field_tmp_3);
 
-vdmFree(*((struct TypedValue**)(((unsigned char*)((struct RealPort *)(((unsigned char*)this) + (!strcmp("RealPort", "RealPort")?0: __builtin_offsetof (struct RealPort, _RealPort_pVTable))))) + __builtin_offsetof (struct RealPort, m_RealPort_value)))); (*((struct TypedValue**)(((unsigned char*)((struct RealPort *)(((unsigned char*)this) + (!strcmp("RealPort", "RealPort")?0: __builtin_offsetof (struct RealPort, _RealPort_pVTable))))) + __builtin_offsetof (struct RealPort, m_RealPort_value))) = vdmCloneGC(field_tmp_3, (struct TypedValue* *)((struct TypedValue**)(((unsigned char*)((struct RealPort *)(((unsigned char*)this) + (!strcmp("RealPort", "RealPort")?0: __builtin_offsetof (struct RealPort, _RealPort_pVTable))))) + __builtin_offsetof (struct RealPort, m_RealPort_value)))));
+vdmFree(*((struct TypedValue**)(((unsigned char*)((struct RealPort *)(((unsigned char*)this) + (!strcmp("RealPort", "RealPort")?(unsigned char*)0: (unsigned char*)__builtin_offsetof (struct RealPort, _RealPort_pVTable))))) + __builtin_offsetof (struct RealPort, m_RealPort_value)))); (*((struct TypedValue**)(((unsigned char*)((struct RealPort *)(((unsigned char*)this) + (!strcmp("RealPort", "RealPort")?(unsigned char*)0: (unsigned char*)__builtin_offsetof (struct RealPort, _RealPort_pVTable))))) + __builtin_offsetof (struct RealPort, m_RealPort_value))) = vdmCloneGC(field_tmp_3, (struct TypedValue* *)((struct TypedValue**)(((unsigned char*)((struct RealPort *)(((unsigned char*)this) + (!strcmp("RealPort", "RealPort")?(unsigned char*)0: (unsigned char*)__builtin_offsetof (struct RealPort, _RealPort_pVTable))))) + __builtin_offsetof (struct RealPort, m_RealPort_value)))));
 
 vdmFree(field_tmp_3);
 }
@@ -1023,7 +1023,7 @@ vdmFree(field_tmp_3);
 
  static struct TypedValue* _Z8getValueEV(struct RealPort* this) {
 
-struct TypedValue* ret_7 = vdmCloneGC(vdmCloneGC((*((struct TypedValue**)((((unsigned char*)((struct RealPort *)(((unsigned char*)this) + (!strcmp("RealPort", "RealPort")?0: __builtin_offsetof (struct RealPort, _RealPort_pVTable))))) + __builtin_offsetof (struct RealPort, m_RealPort_value))))), ((void *)0)), &ret_7)
+struct TypedValue* ret_7 = vdmCloneGC(vdmCloneGC((*((struct TypedValue**)((((unsigned char*)((struct RealPort *)(((unsigned char*)this) + (!strcmp("RealPort", "RealPort")?(unsigned char*)0: (unsigned char*)__builtin_offsetof (struct RealPort, _RealPort_pVTable))))) + (unsigned char*)__builtin_offsetof (struct RealPort, m_RealPort_value))))), ((void *)0)), &ret_7)
 ;
 
 return ret_7;
@@ -1092,7 +1092,7 @@ struct RealPort* RealPort_Constructor(struct RealPort* this_ptr)
 
 
 
-  Port_Constructor((struct Port*)((struct Port *)(((unsigned char*)this_ptr) + (!strcmp("RealPort", "Port")?0: __builtin_offsetof (struct RealPort, _Port_pVTable)))));
+  Port_Constructor((struct Port*)((struct Port *)(((unsigned char*)this_ptr) + (!strcmp("RealPort", "Port")?(unsigned char*)0: (unsigned char*)__builtin_offsetof (struct RealPort, _Port_pVTable)))));
 
      if(! g_VTableArrayForRealPort_Override_Port[0].pFunc)
    {
@@ -1142,7 +1142,7 @@ this = ((struct RealPort *) ( ((struct ClassType*)__buf->value.ptr)->value));
 }
 ;
 
-((struct TypedValue* (*)( void*, struct TypedValue*))(*((struct VTable**)((((unsigned char*)this) + __builtin_offsetof (struct RealPort, _RealPort_pVTable)))))[1].pFunc)(((struct RealPort *)(((unsigned char*)this) + (!strcmp("RealPort", "RealPort")?0: __builtin_offsetof (struct RealPort, _RealPort_pVTable)))), v);
+((struct TypedValue* (*)( void*, struct TypedValue*))(*((struct VTable**)((((unsigned char*)this) + (unsigned char*)__builtin_offsetof (struct RealPort, _RealPort_pVTable)))))[1].pFunc)(((struct RealPort *)(((unsigned char*)this) + (!strcmp("RealPort", "RealPort")?(unsigned char*)0: (unsigned char*)__builtin_offsetof (struct RealPort, _RealPort_pVTable)))), v);
 
 return __buf;
 }
