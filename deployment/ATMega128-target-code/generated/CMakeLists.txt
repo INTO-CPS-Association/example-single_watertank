@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 2.8.5)
-project (watertankController C CXX)
+project (wtc C CXX)
 
 
 add_definitions(-DCUSTOM_IO -DPERIODIC_GENERATED -DFMI_COSIMULATION)
@@ -91,8 +91,8 @@ if (UNIX)
 else()
 
 
-set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC -lm")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -lm")
+set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 
 endif()
 endif()

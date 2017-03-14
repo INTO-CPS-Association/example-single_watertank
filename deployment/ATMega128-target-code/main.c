@@ -40,10 +40,11 @@ int main() {
 	fmiBuffer.realBuffer[1] = 400.0;
 	fmiBuffer.realBuffer[2] = 700.0;
 
-   fmi2Instantiate("this system", fmi2CoSimulation, "", "", &callback, fmi2True,
+   fmi2Component instReturn = fmi2Instantiate("this system", fmi2CoSimulation, _FMU_GUID, "", &callback, fmi2True,
                   fmi2True);
 
-
+	if(instReturn == NULL)
+		return 1;
 
   double now = 0;
   double step = 0.01;

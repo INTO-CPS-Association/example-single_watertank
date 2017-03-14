@@ -13,12 +13,12 @@
 #define INT_COUNT 4
 
 #include "fmi2Functions.h"
+#include "FmuGUID.h"
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdio.h>
-//#include <unistd.h>
-//#include <string.h>
 
 struct FmiBuffer{
 	 fmi2Boolean booleanBuffer[BOOL_COUNT];

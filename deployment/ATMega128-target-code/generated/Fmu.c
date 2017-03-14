@@ -16,6 +16,7 @@ bool isTerminated = false;
 struct FmiBuffer fmiBuffer;
 const fmi2CallbackFunctions *g_fmiCallbackFunctions;
 const char* g_fmiInstanceName;
+extern char* resourcesLocation;
 
 
 // ---------------------------------------------------------------------------
@@ -29,9 +30,18 @@ fmi2Component fmi2Instantiate(fmi2String instanceName, fmi2Type fmuType, fmi2Str
 	
 	g_fmiCallbackFunctions = functions;
 	
+	if(strcmp(fmuGUID, _FMU_GUID) != 0)
+	{
+		g_fmiCallbackFunctions->logger((void*) 1,g_fmiInstanceName,fmi2Error,"logError","%s\n", "GUID mismatch.");
+		return NULL;
+	}
+
 	tmpInstanceName = (char*)malloc(strlen(instanceName) + 1);
 	strcpy(tmpInstanceName, instanceName);
 	g_fmiInstanceName = tmpInstanceName;
+
+	resourcesLocation = (char*)calloc(strlen(fmuResourceLocation) + 1, sizeof(char));
+	strcpy(resourcesLocation, fmuResourceLocation);
 	
 	systemInit();
 

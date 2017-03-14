@@ -179,6 +179,8 @@ struct ClassType* newClassValue(int id, unsigned int* refs, freeVdmClassFunction
 
 #define CALL_FUNC(thisTypeName,funcTname,classValue,id, ... )     (CREATE_CALL_VARG_CAST(struct thisTypeName*, ## __VA_ARGS__ )GET_VTABLE_FUNC( thisTypeName,funcTname,TO_CLASS_PTR(classValue,thisTypeName),id))(CLASS_CAST(TO_CLASS_PTR(classValue,thisTypeName),thisTypeName,funcTname), ##  __VA_ARGS__)
 
+//#define CALL_FUNC(thisTypeName,funcTname,classValue,id, args... )     GET_VTABLE_FUNC( thisTypeName,funcTname,TO_CLASS_PTR(classValue,thisTypeName),id)(CLASS_CAST(TO_CLASS_PTR(classValue,thisTypeName),thisTypeName,funcTname), ## args)
+
 
 /*
  * Macro to obtain a field from a (sub-)class specific class struct. We clone to preserve value semantics and the rule of freeing
@@ -246,7 +248,6 @@ struct ClassType* newClassValue(int id, unsigned int* refs, freeVdmClassFunction
  * compare arguments. Techinically we wated: typeid(from)==typeid(to)
  * but this is not valid C. However it can be ifdeed for C++. But the name compare if ok
  */
-//#define SAME_ARGS(x, y) #x==#y
 #define SAME_ARGS(x, y) !strcmp(#x, #y)
 
 #define SELF(objName) newTypeValue(VDM_CLASS, (TypedValueType){.ptr=newClassValue(this->_##objName##_id, &this->_##objName##_refs, (freeVdmClassFunction)&objName##_free, this)});
