@@ -56,8 +56,7 @@ return ret_21;
 
  static  TVP _Z18fieldInitializer17EV()	{
 /* HardwareInterface.vdmrt 26:34 */
-TVP ret_22 = _Z8RealPortER(NULL, newReal(2.0))
-;
+TVP ret_22 = _Z8RealPortER(NULL, newReal(700.0));
 
 return ret_22;
 }
@@ -66,8 +65,7 @@ return ret_22;
 
  static  TVP _Z18fieldInitializer16EV()	{
 /* HardwareInterface.vdmrt 24:34 */
-TVP ret_23 = _Z8RealPortER(NULL, newReal(1.0))
-;
+TVP ret_23 = _Z8RealPortER(NULL, newReal(400.0));
 
 return ret_23;
 }
