@@ -26,7 +26,7 @@ cp sources/* ../deployment/ATMega128-target-code/generated/
 
 ## STEP 2: Add a new custom `main`
 
-in this case we added `main.c`.  The body of the main ```while``` loop demonstrates how the link between the ```HardwareInterface``` instance of the controller and the target hardware can be made through the ```fmiBuffer``` variable.  It is crucial that the corresponding fields of ```fmiBuffer``` be initialized to any parameter values that exist in ```HardwareInterface```, as demonstrated by the following lines:
+in this case we added `main.c`.  The body of the main ```while``` loop demonstrates how the link between the ```HardwareInterface``` instance of the controller and the target hardware can be made through the ```fmiBuffer``` variable.  It is crucial that the corresponding fields of ```fmiBuffer``` be initialized to any parameter values that exist in ```HardwareInterface``` (note that the values are given as `start` value of `parameter`s in the `modelDescription.xml`), as demonstrated by the following lines:
 ```
 fmiBuffer.realBuffer[FMI_LEVEL_MIN] = 400;
 fmiBuffer.realBuffer[FMI_LEVEL_MAX] = 700;
