@@ -40,14 +40,12 @@ int main() {
 
   //Initialize rest of the buffer.
 
-	fmiBuffer.realBuffer[FMI_LEVEL_MIN] = 400.0;
-	fmiBuffer.realBuffer[FMI_LEVEL_MAX] = 700.0;
-
-   fmi2Component instReturn = fmi2Instantiate("this system", fmi2CoSimulation, _FMU_GUID, "", &callback, fmi2True,
+  fmiBuffer.realBuffer[FMI_LEVEL_MIN] = 400.0;
+  fmiBuffer.realBuffer[FMI_LEVEL_MAX] = 700.0 fmi2Component instReturn = fmi2Instantiate("this system", fmi2CoSimulation, _FMU_GUID, "", &callback, fmi2True,
                   fmi2True);
 
-	//if(instReturn == NULL)
-	//	return 1;
+  if(instReturn == NULL)
+	return 1;
 
   double now = 0;
   double step = 0.01;
@@ -55,8 +53,6 @@ int main() {
   while (true) {
     // hardware sync inputs to buffer
     fmiBuffer.realBuffer[FMI_LEVEL_ID] = ReadADC(0);
-	
-
 
     fmi2DoStep(NULL, now, step, false);
 	
