@@ -26,7 +26,12 @@ cp sources/* ../deployment/ATMega128-target-code/generated/
 
 ## STEP 2: Add a new custom `main`
 
-in this case we added `main.c`
+in this case we added `main.c`.  The body of the main ```while``` loop demonstrates how the link between the ```HardwareInterface``` instance of the controller and the target hardware can be made through the ```fmiBuffer``` variable.  It is crucial that the corresponding fields of ```fmiBuffer``` are initialized to any parameter values that exist in ```HardwareInterface```, as demonstrated by the following lines:
+```
+fmiBuffer.realBuffer[FMI_LEVEL_MIN] = 400;
+fmiBuffer.realBuffer[FMI_LEVEL_MAX] = 700;
+```
+In the case of the hardware setup used here, the water level in the tank ranges from 0 to 1023, 400 is the chosen minimum, 700 the maximum.  The array indices are extracted from the corresponding entries in the ```modelDescription.xml``` file and are ```#define```d earlier.
 
 
 ## STEP 3: Compile the code for the target
