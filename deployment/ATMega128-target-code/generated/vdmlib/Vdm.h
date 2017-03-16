@@ -36,7 +36,7 @@
  *  but this is not appreciated in the testing framework
  */
 #ifndef FATAL_ERROR
-#define FATAL_ERROR(message) exit(8)
+#define FATAL_ERROR(message) exit(EXIT_FAILURE)
 #endif
 
 #include <string.h>

@@ -21,6 +21,9 @@
 #define FMI_LEVEL_ID 0
 #define FMI_VALVE_STATE 3
 
+#define FMI_LEVEL_MIN 1
+#define FMI_LEVEL_MAX 2
+
 void fmuLoggerCache(void *componentEnvironment, fmi2String instanceName,
                     fmi2Status status, fmi2String category, fmi2String message,
                     ...) {}
@@ -37,14 +40,14 @@ int main() {
 
   //Initialize rest of the buffer.
 
-	fmiBuffer.realBuffer[1] = 400.0;
-	fmiBuffer.realBuffer[2] = 700.0;
+	fmiBuffer.realBuffer[FMI_LEVEL_MIN] = 400.0;
+	fmiBuffer.realBuffer[FMI_LEVEL_MAX] = 700.0;
 
    fmi2Component instReturn = fmi2Instantiate("this system", fmi2CoSimulation, _FMU_GUID, "", &callback, fmi2True,
                   fmi2True);
 
-	if(instReturn == NULL)
-		return 1;
+	//if(instReturn == NULL)
+	//	return 1;
 
   double now = 0;
   double step = 0.01;
@@ -71,8 +74,6 @@ int main() {
     _delay_ms(200);
     PORTB &= ~(1 << PINB0);
     _delay_ms(200);
-
-    vdm_gc();
   }
 
   return 0;
