@@ -36,10 +36,9 @@
  *  but this is not appreciated in the testing framework
  */
 #ifndef FATAL_ERROR
-#define FATAL_ERROR(message) //exit(EXIT_FAILURE)
+#define FATAL_ERROR(message) exit(8)
 #endif
 
-//#include <time.h>
 #include <string.h>
 #include <limits.h>
 #include <stdio.h>

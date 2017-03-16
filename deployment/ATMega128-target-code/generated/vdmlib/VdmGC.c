@@ -35,8 +35,8 @@ void remove_allocd_mem_node_by_location(TVP loc)
 {
 	struct alloc_list_node *tmp, *prev;
 
-	tmp = allocd_mem_head;
 	prev = NULL;
+	tmp = allocd_mem_head;
 
 	if(tmp == NULL)
 	{

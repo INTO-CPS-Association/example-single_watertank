@@ -32,24 +32,36 @@ int main() {
   InitADC();
 
   fmi2CallbackFunctions callback = {&fmuLoggerCache, NULL, NULL, NULL, NULL};
-  fmi2Instantiate("this system", fmi2CoSimulation, "", "", &callback, fmi2True,
+ 
+  //systemInit();
+
+  //Initialize rest of the buffer.
+
+	fmiBuffer.realBuffer[1] = 400.0;
+	fmiBuffer.realBuffer[2] = 700.0;
+
+   fmi2Component instReturn = fmi2Instantiate("this system", fmi2CoSimulation, _FMU_GUID, "", &callback, fmi2True,
                   fmi2True);
-  systemInit();
+
+	if(instReturn == NULL)
+		return 1;
 
   double now = 0;
-  double step = 0.001;
+  double step = 0.01;
 
   while (true) {
     // hardware sync inputs to buffer
     fmiBuffer.realBuffer[FMI_LEVEL_ID] = ReadADC(0);
+	
+
 
     fmi2DoStep(NULL, now, step, false);
-
+	
     now = now + step;
 
     // sync buffer with hardware
     if (fmiBuffer.booleanBuffer[FMI_VALVE_STATE]) {
-      PORTB &= ~(1 << PINB3);
+		PORTB &= ~(1 << PINB3);
     } else {
       PORTB |= 1 << PINB3;
     }
