@@ -17,6 +17,7 @@
 --##	EXPORT	bcb7c0b8b8e5c32520be4a59785fc85eefd60ac5	watertankController.fmu	2017-24-02 13:30:06	c-code	{"name":"fmu-import-export","version":"0.1.7-SNAPSHOT"}
 --##	EXPORT	36a67a55891590b4b33190799b0fe1d0a8131031	FMU.fmu	2017-24-02 13:24:02	c-code	{"name":"fmu-import-export","version":"0.1.7-SNAPSHOT"}
 --##	EXPORT	8f4818fa36f78723aa75bd7049d57e901f464be1	wtc.fmu	2017-24-02 13:18:33	c-code	{"name":"fmu-import-export","version":"0.1.5-SNAPSHOT"}
+
 -- Generated class
 class HardwareInterface
 
