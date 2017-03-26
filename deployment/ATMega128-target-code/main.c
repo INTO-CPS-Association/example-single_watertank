@@ -18,11 +18,11 @@
 #include <util/delay_basic.h>
 #include <util/delay.h>
 
-#define FMI_LEVEL_ID 0
-#define FMI_VALVE_STATE 3
+#define FMI_LEVEL_ID 3
+#define FMI_VALVE_STATE 2
 
-#define FMI_LEVEL_MIN 1
-#define FMI_LEVEL_MAX 2
+#define FMI_LEVEL_MIN 0
+#define FMI_LEVEL_MAX 1
 
 void fmuLoggerCache(void *componentEnvironment, fmi2String instanceName,
                     fmi2Status status, fmi2String category, fmi2String message,
