@@ -27,6 +27,9 @@
 #include "ValveActuator.h"
 #include "HardwareInterface.h"
 
+TVP sys = NULL;
+fmi2Boolean syncOutAllowed = fmi2True;
+
 
 void syncInputsToModel(){
 	{
@@ -47,6 +50,8 @@ void syncInputsToModel(){
 	}
 }
 void syncOutputsToBuffers(){
+	if(syncOutAllowed == fmi2False) return;
+
 	{
 		TVP p = GET_FIELD(HardwareInterface,HardwareInterface,g_System_hwi,valveState);
 		TVP v = GET_FIELD(BoolPort,BoolPort,p,value);
@@ -66,11 +71,13 @@ struct PeriodicThreadStatus threads[] ={
 };
 
 
-TVP sys = NULL;
-
 void systemInit()
 {
 	vdm_gc_init();
+
+	int i;
+
+	for(i = 0; i < PERIODIC_GENERATED_COUNT; i++) threads[i].period = threads[i].period / 1.0E9;
 
 	Port_const_init();
 	IntPort_const_init();
@@ -139,59 +146,58 @@ void systemDeInit()
 */
 fmi2Status vdmStep(fmi2Real currentCommunicationPoint, fmi2Real communicationStepSize)
 {
-	//convert seconds to nanoseconds
-	currentCommunicationPoint = currentCommunicationPoint*1E9;
-	communicationStepSize = communicationStepSize*1E9;
-
 	int i, j;
 	int threadRunCount;
-
-
-	//We want to be able to align synchronization on either step size or thread boundary.
-	for(i = 0;  i < PERIODIC_GENERATED_COUNT; i++)
-	{
-		if(
-			(communicationStepSize >= threads[i].period) &&
-			(((long long int) communicationStepSize) % ((long long int)threads[i].period) != 0))
-		{
-			g_fmiCallbackFunctions->logger((void*) 1,g_fmiInstanceName,fmi2Discard,"logError","%s\n", "Discarding step:  step size not integer multiple of thread period.");
-			return fmi2Discard;
-		}
-		else if(
-			(threads[i].period >= communicationStepSize) &&
-			(((long long int)threads[i].period) % ((long long int) communicationStepSize) != 0))
-		{
-			g_fmiCallbackFunctions->logger((void*) 1,g_fmiInstanceName,fmi2Discard,"logError","%s\n", "Discarding step:  thread period not integer multiple of step size.");
-			return fmi2Discard;
-		}
-	}
 
 
 	//Call each thread the appropriate number of times.
 	for(i = 0;  i < PERIODIC_GENERATED_COUNT; i++)
 	{
-		if(communicationStepSize >= threads[i].period)
+		//Times align, sync took place last time.
+		if(threads[i].lastExecuted >= currentCommunicationPoint)
 		{
-			threadRunCount = ((long long int) communicationStepSize) / ((long long int)threads[i].period);
+			//Can not do anything, still waiting for the last step's turn to come.
+			if(threads[i].lastExecuted >= currentCommunicationPoint + communicationStepSize)
+			{
+				threadRunCount = 0;
+				syncOutAllowed = fmi2False;
+			}
+			//Previous step will finish inside this step.
+			//At least one execution can be fit inside this step.
+			else if(threads[i].lastExecuted + threads[i].period <= currentCommunicationPoint + communicationStepSize)
+			{
+				//Find number of executions to fit inside of step, allow sync.
+				threadRunCount = (currentCommunicationPoint + communicationStepSize - threads[i].lastExecuted) / threads[i].period;
+				syncOutAllowed = fmi2True;
+			}
+			//Can not execute, but can sync existing values at the end of this step.
+			else 
+			{
+				threadRunCount = 0;
+				syncOutAllowed = fmi2True;
+			}
 		}
 		else
 		{
-			//Taking into account rounding errors.  Ideal condition is currentCommunicationPoint == threads[i].lastExecuted.
-			if(((long long int)currentCommunicationPoint) - 2 <= ((long long int)(threads[i].lastExecuted)) && ((long long int)(threads[i].lastExecuted) <= ((long long int)currentCommunicationPoint) + 2))
+			//Find number of executions to fit inside of step, allow sync because need to update regardless.
+			threadRunCount = (currentCommunicationPoint + communicationStepSize - threads[i].lastExecuted) / threads[i].period;
+			syncOutAllowed = fmi2True;
+
+			//Period too long for this step so postpone until next step.
+			if(threadRunCount == 0)
 			{
-				threadRunCount = 1;
-			}
-			else
-			{
-				threadRunCount = 0;
+				syncOutAllowed = fmi2False;
 			}
 		}
+
+			
+		//printf("NOW:  %Lf, TP: %Lf, LE:  %Lf, STEP:  %Lf, SYNC:  %d, RUNS:  %d\n", currentCommunicationPoint / 1E9, threads[i].period / 1E9, threads[i].lastExecuted / 1E9, communicationStepSize / 1E9, syncOutAllowed, threadRunCount);
+		//printf("NOW:  %f, TP: %f, LE:  %f, STEP:  %f, SYNC:  %d, RUNS:  %d\n", currentCommunicationPoint, threads[i].period, threads[i].lastExecuted, communicationStepSize, syncOutAllowed, threadRunCount);
 
 		//Execute each thread the number of times that its period fits in the step size.
 		for(j = 0; j < threadRunCount; j++)
 		{
 			threads[i].call();
-//			printf("RUN THREAD AT %lf\n", currentCommunicationPoint / 1E9);
 
 			//Update the thread's last execution time.
 			threads[i].lastExecuted += threads[i].period;
