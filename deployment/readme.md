@@ -27,7 +27,7 @@ cp sources/* ../deployment/ATMega128-target-code/generated/
 ## STEP 2: Add a new custom `main`
 
 
-In this case we added `main.c`.  The ```main()``` function is tailored for the following hardware setup:
+The FMU exporter provides an example `main.c` file.  In this case we moved this file one directory out and customized it.  The ```main()``` function is tailored for the following hardware setup:
 - Microcontroller:  ATMEGA 1284P
 - Fuse configuration:
   - ```JTAGEN``` and ```SPIEN``` fuses set for the purpose of programming the target.
