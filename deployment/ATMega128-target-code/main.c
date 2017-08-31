@@ -41,7 +41,8 @@ int main() {
   //Initialize rest of the buffer.
 
   fmiBuffer.realBuffer[FMI_LEVEL_MIN] = 400.0;
-  fmiBuffer.realBuffer[FMI_LEVEL_MAX] = 700.0 fmi2Component instReturn = fmi2Instantiate("this system", fmi2CoSimulation, _FMU_GUID, "", &callback, fmi2True,
+  fmiBuffer.realBuffer[FMI_LEVEL_MAX] = 700.0;
+fmi2Component instReturn = fmi2Instantiate("this system", fmi2CoSimulation, _FMU_GUID, "", &callback, fmi2True,
                   fmi2True);
 
   if(instReturn == NULL)
