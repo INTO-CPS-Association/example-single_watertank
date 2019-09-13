@@ -1,0 +1,37 @@
+--##	EXPORT	805d909d51551820fd6fd3c522c3b706712c6f57	SystemIdentifiedTank.fmu	2019-24-07 14:44:27	tool-wrapper	{"name":"fmu-import-export","version":"0.2.18"}
+--##	EXPORT	a6b7d56ecbd1f717504ea9751104e67f4666295b	ModelImportTest.fmu	2019-24-07 14:30:44	tool-wrapper	{"name":"fmu-import-export","version":"0.2.18"}
+--##	IMPORT	5c5c72e81ca0148f306e157f19fdccf2fca3a52a	modelDescription.xml	2019-24-07 14:28:48	FMI-ModelDescription	{"name":"fmu-import-export","version":"0.2.18"}
+-- Generated class
+class HardwareInterface
+
+values
+	-- @ interface: type = parameter, name="Drain.r";
+	public Drainr : RealPort = new RealPort(9.0);
+	-- @ interface: type = parameter, name="FlowSource.phi";
+	public FlowSourcephi : RealPort = new RealPort(1.0);
+	-- @ interface: type = parameter, name="tank.Tank.area";
+	public tankTankarea : RealPort = new RealPort(1.0);
+	-- @ interface: type = parameter, name="tank.Tank.gravity";
+	public tankTankgravity : RealPort = new RealPort(9.81);
+	-- @ interface: type = parameter, name="tank.Tank.liquid_density";
+	public tankTankliquiddensity : RealPort = new RealPort(1.0);
+	-- @ interface: type = parameter, name="tank.Tank.volume_initial";
+	public tankTankvolumeinitial : RealPort = new RealPort(0.0);
+	-- @ interface: type = parameter, name="Valve.outflow_int_initial";
+	public Valveoutflowintinitial : RealPort = new RealPort(0.0);
+
+
+instance variables
+	-- @ interface: type = input, name="valvecontrol";
+	public valvecontrol : RealPort := new RealPort(0.0);
+
+
+instance variables
+	-- @ interface: type = output, name="level";
+	public level : RealPort := new RealPort(0.0);
+
+
+  
+  
+end HardwareInterface
+

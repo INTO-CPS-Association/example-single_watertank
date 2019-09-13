@@ -1,0 +1,29 @@
+system System
+
+instance variables
+
+-- Hardware interface variable required by FMU Import/Export
+public static hwi: HardwareInterface := new HardwareInterface();
+    
+
+instance variables
+
+  public levelActuator : LevelActuator;
+  public valveSensor : ValveSensor;
+  public static ARX : [ARX] := nil;
+
+	cpu1 : CPU := new CPU(<FP>, 20);
+operations
+
+public System : () ==> System
+System () == 
+(
+	levelActuator := new LevelActuator(hwi.level);
+	valveSensor :=  new ValveSensor(hwi.valvecontrol); 
+	
+	ARX := new ARX(4,4,0, levelActuator, valveSensor);
+
+	cpu1.deploy(ARX,"ARX");
+);
+
+end System

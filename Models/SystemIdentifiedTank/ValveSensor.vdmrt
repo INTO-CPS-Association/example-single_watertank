@@ -1,0 +1,16 @@
+class ValveSensor
+
+
+instance variables
+
+port : RealPort;
+
+operations
+
+public ValveSensor: Port ==> ValveSensor
+ValveSensor(p) == port := p;
+
+public getValve: () ==> real
+getValve()== return port.getValue();
+
+end ValveSensor

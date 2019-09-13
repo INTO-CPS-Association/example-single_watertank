@@ -1,0 +1,1 @@
+{"fmus":{"{control}":"watertankcontroller-c.fmu","{tank}":"SystemIdentifiedTank.fmu"},"connections":{"{tank}.t.level":["{control}.c.level"],"{control}.c.valve":["{tank}.t.valvecontrol"]},"parameters":{"{control}.c.maxlevel":2,"{control}.c.minlevel":1}}

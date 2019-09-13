@@ -1,0 +1,16 @@
+class LevelActuator
+
+
+instance variables
+
+port : RealPort;
+
+operations
+
+public LevelActuator: RealPort ==> LevelActuator
+LevelActuator(p) == port := p;
+
+public setLevel: (real) ==> ()
+setLevel(level)== port.setValue(level);
+
+end LevelActuator

@@ -1,0 +1,60 @@
+class ARX
+types
+-- TODO Define types here
+values
+	
+instance variables
+	na: nat;
+	nb: nat;
+	nk: nat;
+	output: nat := 0; 
+	a: seq of real := [-1.6385, 0.802, -0.136, 0.0078];
+	b: seq of real := [0.0078, -0.1742, 0.1191,-0.0251];
+	history: seq of real := [0, 0, 0, 0, 0];
+	u: seq of real := [0,0,0,0,0];
+	u_model: real := 0.65;
+	y_model: real := 1.38709;
+	levelActuator : LevelActuator;
+	valveSensor : ValveSensor;
+	
+values
+	open : bool = true;
+	close: bool = false;
+	
+operations
+	public ARX : nat * nat * nat * LevelActuator * ValveSensor ==> ARX
+	ARX(n, m, d, l, v) == (
+ 		na := n;
+ 		nb := m;
+ 		nk := d;
+ 		levelActuator := l;
+ 		valveSensor:= v;
+ 	);
+ 	
+ 	private loop : () ==> ()
+ 	loop() == cycles(4)(
+ 		dcl total : real := 0;
+ 		IO`printf("Time: %sms\n", [time / 10E6]);
+		for i = 1 to nb by 1 do (
+			total := total + b(i) * (u(len u - (i - 1)) - u_model);
+			);
+			
+		for j = 1 to na by 1 do (
+			
+			total := total - a(j) * (history(len history - (j - 1)) - y_model);
+			
+			);
+			
+		total := total + y_model;
+		
+		-- shift everything back one
+		history := tl history ^ [total];
+		
+		levelActuator.setLevel(total);
+		u := u ^ [valveSensor.getValve()]
+ 	);
+		
+thread
+periodic(10E6,0,0,0)(loop);	 
+			
+end ARX
