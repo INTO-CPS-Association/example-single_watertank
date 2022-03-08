@@ -1,0 +1,80 @@
+Add the option to generate some parameters as external (config/venv)
+Generate the mabl spec
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+Interpret the spec using JAVA
+Generate native cpp simulator
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+16:32:22.058 [main] WARN  org.intocps.maestro.cli.ExportCmd - Generated spec not written. File already exists: sim-dse/cpp/spec.mabl
+Running cmake for native cpp simulator - it talkes a while...
+-- Could NOT find MbedTLS: Found unsuitable version "", but required is at least "1.0" (found /usr/local/lib/libmbedcrypto.dylib)
+-- Could NOT find OpenSSL, try to set the path to OpenSSL root folder in the system variable OPENSSL_ROOT_DIR (missing: OPENSSL_CRYPTO_LIBRARY OPENSSL_INCLUDE_DIR) 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/kgl/data/au/into-cps-association/example-single_watertank/sim-dse/cpp/program
+Compiling native cpp simulator...
+Consolidate compiler generated dependencies of target zip
+[  1%] Building C object _deps/libzip-build/lib/CMakeFiles/zip.dir/__/__/zip_err_str.c.o
+[  2%] Linking C static library libzip.a
+[ 91%] Built target zip
+Consolidate compiler generated dependencies of target sim
+[ 92%] Building CXX object CMakeFiles/sim.dir/libs/DataWriter.cpp.o
+[ 93%] Building CXX object CMakeFiles/sim.dir/libs/BooleanLogic.cpp.o
+[ 94%] Building C object CMakeFiles/sim.dir/libs/uri.c.o
+[ 95%] Building CXX object CMakeFiles/sim.dir/libs/Logger.cpp.o
+[ 95%] Building CXX object CMakeFiles/sim.dir/libs/SimMath.cpp.o
+[ 96%] Building CXX object CMakeFiles/sim.dir/libs/SimFmi2.cpp.o
+[ 97%] Building CXX object CMakeFiles/sim.dir/libs/VariableStep.cpp.o
+[ 98%] Building CXX object CMakeFiles/sim.dir/libs/unzip.cpp.o
+[ 98%] Building CXX object CMakeFiles/sim.dir/libs/MEnv.cpp.o
+[ 99%] Building CXX object CMakeFiles/sim.dir/co-sim.cxx.o
+[100%] Building CXX object CMakeFiles/sim.dir/main.cpp.o
+[100%] Linking CXX executable sim
+[100%] Built target sim
+Check the program
+Help
+sim 
+
+	-help, -?	Prints this message
+	-runtime	Path to a runtime json file used for runtime configuration
+	-sha1	To show the pretty printed SHA1 checksum of the input spec
+Run natime simulation
+Run using env
+cpp1.log:Executed in 0 [hours] 0 [min] 0 [seconds] 152 [milliseconds] 35 [microseconds] 197 [nanoseconds] 
+cpp2.log:Executed in 0 [hours] 0 [min] 0 [seconds] 139 [milliseconds] 426 [microseconds] 880 [nanoseconds] 
+cpp3.log:Executed in 0 [hours] 0 [min] 0 [seconds] 155 [milliseconds] 994 [microseconds] 143 [nanoseconds] 
+==> cpp1-outputs.csv <==
+29.000000000000142 , false , 1.8825341672889326
+29.100000000000144 , false , 1.9825341672889349
+29.200000000000145 , false , 2.0825341672889333
+29.300000000000146 , true , 2.1825341672889311
+29.400000000000148 , true , 2.0554429905766711
+29.500000000000149 , true , 1.9379209873369947
+29.600000000000151 , true , 1.832535432305288
+29.700000000000152 , true , 1.7380329995421988
+29.800000000000153 , true , 1.6532897935548576
+29.900000000000155 , true , 1.5772979830687084
+
+==> cpp2-outputs.csv <==
+29.000000000000142 , false , 6.0826258159148994
+29.100000000000144 , false , 6.1826258159148972
+29.200000000000145 , false , 6.2826258159148951
+29.300000000000146 , false , 6.382625815914893
+29.400000000000148 , false , 6.4826258159148908
+29.500000000000149 , false , 6.5826258159148887
+29.600000000000151 , false , 6.6826258159148866
+29.700000000000152 , false , 6.7826258159148844
+29.800000000000153 , false , 6.8826258159148823
+29.900000000000155 , false , 6.9826258159148802
+
+==> cpp3-outputs.csv <==
+29.000000000000142 , true , 1.0095649012242125
+29.100000000000144 , true , 1.0000502916075726
+29.200000000000145 , true , 0.99151825175360009
+29.300000000000146 , false , 0.98386731209313705
+29.400000000000148 , false , 1.0820799531428364
+29.500000000000149 , true , 1.1820799531428388
+29.600000000000151 , true , 1.1566754654040605
+29.700000000000152 , true , 1.1319688092446758
+29.800000000000153 , true , 1.1098135991515983
+29.900000000000155 , true , 1.0899463483548153
+Done.
