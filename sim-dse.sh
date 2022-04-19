@@ -1,11 +1,9 @@
 
-
-
-mvn --quiet dependency:get \
- -DremoteRepositories=overture::default::http://overture.au.dk/artifactory/into-cps \
+mvn  --quiet  org.apache.maven.plugins:maven-dependency-plugin:3.3.0:copy \
+ -DremoteRepositories=https://overture.au.dk/artifactory/into-cps \
  -Dartifact=org.into-cps.maestro:maestro:2.2.1-SNAPSHOT:jar:jar-with-dependencies \
- -Dtransitive=false \
- -Ddest=maestro-2.2.1-SNAPSHOT-jar-with-dependencies.jar
+ -Dtransitive=false -DoutputDirectory=.
+
 
 #mabl=/Users/kgl/data/au/into-cps-association/maestro/maestro/target/maestro-2.2.1-SNAPSHOT-jar-with-dependencies.jar
 mabl=maestro-2.2.1-SNAPSHOT-jar-with-dependencies.jar
@@ -77,5 +75,5 @@ export Controller_cont_maxlevel=1
 sim-dse/cpp/program/sim  -runtime sim-dse/spec.cpp3.runtime.json > cpp3.log
 
 grep -r "Executed in" cpp*.log
-tail cpp*-outputs.csv
+
 echo Done.
